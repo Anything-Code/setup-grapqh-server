@@ -1,12 +1,12 @@
 import { ApolloServer } from 'apollo-server';
-import { appDb } from './db';
+import { pc } from './prisma-client';
 import { schema } from './schema';
 
 const server = new ApolloServer({
     schema,
     context: () => {
         return {
-            prisma: appDb,
+            prisma: pc,
         };
     },
 });

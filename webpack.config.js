@@ -2,7 +2,7 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 
 module.exports =  {
-    entry: './src/server.ts',
+    entry: './src/index.ts',
     target: 'node',
     node: {
         __filename: false,
@@ -22,7 +22,7 @@ module.exports =  {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'server.js',
+        filename: 'build.js',
         libraryTarget: 'commonjs'
     },
     resolve: {

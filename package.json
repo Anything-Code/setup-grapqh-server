@@ -3,27 +3,24 @@
     "version": "1.0.0",
     "author": "Niklas Lübcke",
     "license": "ISC",
-    "main": "./dist/server.js",
+    "main": "./dist/build.js",
     "description": "",
     "scripts": {
-        "start": "node ./dist/server.js",
-        "build": "yarn build:prod",
+        "start": "node ./dist/build.js",
         "watch": "yarn build:dev --watch",
+        "build": "yarn build:prod",
+        "generate": "npx prisma generate",
         "build:dev": "webpack --mode=development --progress",
         "build:prod": "webpack --mode=production --progress",
-        "compile": "yarn compile-all",
-        "compile-all": "yarn pkg ./dist/bundle.js --out-path bin",
-        "compile-win": "yarn pkg ./dist/bundle.js --targets node14-win-x64 --out-path bin",
-        "compile-lin": "yarn pkg ./dist/bundle.js --targets node14-linux-x64 --out-path bin",
-        "compile-mac": "yarn pkg ./dist/bundle.js --targets node14-macos-x64 --out-path bin"
+        "compile": "yarn compile-all"
     },
     "dependencies": {
-        "@prisma/client": "^2.23.0",
-        "apollo-server": "^2.25.1",
+        "@prisma/client": "^2.20.0",
+        "apollo-server": "^2.22.2",
         "graphql": "^15.5.0",
         "nexus": "^1.0.0",
-        "nexus-plugin-prisma": "^0.35.0",
-        "nexus-prisma": "^0.28.0"
+        "nexus-plugin-prisma": "^0.33.0",
+        "nexus-prisma": "^0.25.0"
     },
     "devDependencies": {
         "@types/koa-router": "^7.4.2",
@@ -34,11 +31,8 @@
         "eslint-plugin-prettier": "^3.4.0",
         "node-loader": "^2.0.0",
         "nodemon": "^2.0.7",
-        "pkg": "^5.2.1",
         "prettier": "^2.3.1",
-        "prisma": "^2.23.0",
         "ts-loader": "^9.2.3",
-        "ts-node": "^10.0.0",
         "typescript": "^4.3.2",
         "webpack": "^5.38.1",
         "webpack-cli": "^4.7.2",

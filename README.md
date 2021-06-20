@@ -2,4 +2,4 @@
 
 A simple starterkit for Nexus and Prisma GraphQL apis.
 
-To understand how this works, read the [Blog post](https://zach.codes/nexus-prisma-is-the-future-of-backend)
+Authentication middleware is in place using cookies and sessions
