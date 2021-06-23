@@ -1,1 +1,140 @@
-(()=>{"use strict";var e={880:(e,r,s)=>{Object.defineProperty(r,"__esModule",{value:!0}),r.pc=void 0;const t=s(212);r.pc=new t.PrismaClient},734:(e,r,s)=>{Object.defineProperty(r,"__esModule",{value:!0}),r.schema=void 0;const t=s(237),n=s(23),i=s(313),o=s(622);r.schema=i.makeSchema({plugins:[n.nexusPrisma({experimentalCRUD:!0})],outputs:{typegen:o.join(process.cwd(),"src","types","generated","nexus.d.ts"),schema:o.join(process.cwd(),"src","types","generated","schema.graphql")},types:[i.objectType({name:t.User.$name,description:t.User.$description,definition(e){e.field(t.User.id.name,t.User.id),e.field(t.User.name.name,t.User.name),e.field(t.User.email.name,t.User.email),e.field(t.User.password.name,t.User.password)}}),i.queryType({definition(e){e.crud.users(),e.crud.user()}}),i.mutationType({definition(e){e.crud.createOneUser(),e.crud.upsertOneUser(),e.crud.updateOneUser(),e.crud.deleteOneUser()}})]})},212:e=>{e.exports=require("@prisma/client")},232:e=>{e.exports=require("apollo-server")},313:e=>{e.exports=require("nexus")},23:e=>{e.exports=require("nexus-plugin-prisma")},237:e=>{e.exports=require("nexus-prisma")},622:e=>{e.exports=require("path")}},r={};function s(t){var n=r[t];if(void 0!==n)return n.exports;var i=r[t]={exports:{}};return e[t](i,i.exports,s),i.exports}var t={};(()=>{var e=t;Object.defineProperty(e,"__esModule",{value:!0});const r=s(232),n=s(880),i=s(734);new r.ApolloServer({schema:i.schema,context:()=>({prisma:n.pc})}).listen().then((({url:e})=>{console.log(`🚀 Server ready at ${e}`)}))})();var n=exports;for(var i in t)n[i]=t[i];t.__esModule&&Object.defineProperty(n,"__esModule",{value:!0})})();
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/index.ts":
+/*!**********************!*\
+  !*** ./src/index.ts ***!
+  \**********************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst apollo_server_1 = __webpack_require__(/*! apollo-server */ \"apollo-server\");\r\nconst prisma_client_1 = __webpack_require__(/*! ./prisma-client */ \"./src/prisma-client.ts\");\r\nconst schema_1 = __webpack_require__(/*! ./schema */ \"./src/schema.ts\");\r\nconst server = new apollo_server_1.ApolloServer({\r\n    schema: schema_1.schema,\r\n    context: () => {\r\n        return {\r\n            prisma: prisma_client_1.pc,\r\n        };\r\n    },\r\n});\r\nserver.listen().then(({ url }) => {\r\n    console.log(`🚀 Server ready at ${url}`);\r\n});\r\n\n\n//# sourceURL=webpack://setup-graphql-server/./src/index.ts?");
+
+/***/ }),
+
+/***/ "./src/prisma-client.ts":
+/*!******************************!*\
+  !*** ./src/prisma-client.ts ***!
+  \******************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.pc = void 0;\r\nconst client_1 = __webpack_require__(/*! @prisma/client */ \"@prisma/client\");\r\nexports.pc = new client_1.PrismaClient();\r\n\n\n//# sourceURL=webpack://setup-graphql-server/./src/prisma-client.ts?");
+
+/***/ }),
+
+/***/ "./src/schema.ts":
+/*!***********************!*\
+  !*** ./src/schema.ts ***!
+  \***********************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.schema = void 0;\r\nconst nexus_prisma_1 = __webpack_require__(/*! nexus-prisma */ \"nexus-prisma\");\r\nconst nexus_plugin_prisma_1 = __webpack_require__(/*! nexus-plugin-prisma */ \"nexus-plugin-prisma\");\r\nconst nexus_1 = __webpack_require__(/*! nexus */ \"nexus\");\r\nconst path_1 = __webpack_require__(/*! path */ \"path\");\r\n// import { getStoredUser, storeUser } from './customUserResolvers';\r\nexports.schema = nexus_1.makeSchema({\r\n    plugins: [\r\n        nexus_plugin_prisma_1.nexusPrisma({\r\n            experimentalCRUD: true,\r\n        }),\r\n    ],\r\n    outputs: {\r\n        typegen: path_1.join(process.cwd(), 'src', 'types', 'generated', 'nexus.d.ts'),\r\n        schema: path_1.join(process.cwd(), 'src', 'types', 'generated', 'schema.graphql'),\r\n    },\r\n    types: [\r\n        nexus_1.objectType({\r\n            name: nexus_prisma_1.User.$name,\r\n            description: nexus_prisma_1.User.$description,\r\n            definition(t) {\r\n                t.field(nexus_prisma_1.User.id.name, nexus_prisma_1.User.id);\r\n                t.field(nexus_prisma_1.User.name.name, nexus_prisma_1.User.name);\r\n                t.field(nexus_prisma_1.User.email.name, nexus_prisma_1.User.email);\r\n                t.field(nexus_prisma_1.User.password.name, nexus_prisma_1.User.password);\r\n            },\r\n        }),\r\n        nexus_1.queryType({\r\n            definition(t) {\r\n                t.crud.users();\r\n                t.crud.user();\r\n            },\r\n        }),\r\n        nexus_1.mutationType({\r\n            definition(t) {\r\n                t.crud.createOneUser();\r\n                t.crud.upsertOneUser();\r\n                t.crud.updateOneUser();\r\n                t.crud.deleteOneUser();\r\n            },\r\n        }),\r\n    ],\r\n});\r\n\n\n//# sourceURL=webpack://setup-graphql-server/./src/schema.ts?");
+
+/***/ }),
+
+/***/ "@prisma/client":
+/*!*********************************!*\
+  !*** external "@prisma/client" ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = require("@prisma/client");;
+
+/***/ }),
+
+/***/ "apollo-server":
+/*!********************************!*\
+  !*** external "apollo-server" ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = require("apollo-server");;
+
+/***/ }),
+
+/***/ "nexus":
+/*!************************!*\
+  !*** external "nexus" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = require("nexus");;
+
+/***/ }),
+
+/***/ "nexus-plugin-prisma":
+/*!**************************************!*\
+  !*** external "nexus-plugin-prisma" ***!
+  \**************************************/
+/***/ ((module) => {
+
+module.exports = require("nexus-plugin-prisma");;
+
+/***/ }),
+
+/***/ "nexus-prisma":
+/*!*******************************!*\
+  !*** external "nexus-prisma" ***!
+  \*******************************/
+/***/ ((module) => {
+
+module.exports = require("nexus-prisma");;
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("path");;
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.ts");
+/******/ 	var __webpack_export_target__ = exports;
+/******/ 	for(var i in __webpack_exports__) __webpack_export_target__[i] = __webpack_exports__[i];
+/******/ 	if(__webpack_exports__.__esModule) Object.defineProperty(__webpack_export_target__, "__esModule", { value: true });
+/******/ 	
+/******/ })()
+;
