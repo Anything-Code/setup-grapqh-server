@@ -16,15 +16,21 @@
     },
     "dependencies": {
         "@prisma/client": "^2.20.0",
-        "apollo-server": "^2.22.2",
+        "apollo-server-express": "^2.25.2",
+        "connect-sqlite3": "^0.9.11",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "express-session": "^1.17.2",
         "faker": "^5.5.3",
         "graphql": "^15.5.0",
         "immutable": "^4.0.0-rc.12",
         "nexus": "^1.0.0",
         "nexus-plugin-prisma": "^0.33.0",
-        "nexus-prisma": "^0.25.0"
+        "nexus-prisma": "^0.25.0",
+        "nexus-shield": "^2.0.0"
     },
     "devDependencies": {
+        "@types/express-session": "^1.17.3",
         "@types/faker": "^5.5.6",
         "@types/koa-router": "^7.4.2",
         "@types/node": "^15.12.2",

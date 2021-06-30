@@ -14,9 +14,9 @@
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst apollo_server_1 = __webpack_require__(/*! apollo-server */ \"apollo-server\");\r\nconst prisma_client_1 = __webpack_require__(/*! ./prisma-client */ \"./src/prisma-client.ts\");\r\nconst schema_1 = __webpack_require__(/*! ./schema */ \"./src/schema.ts\");\r\nconst server = new apollo_server_1.ApolloServer({\r\n    schema: schema_1.schema,\r\n    context: () => {\r\n        return {\r\n            prisma: prisma_client_1.pc,\r\n        };\r\n    },\r\n});\r\nserver.listen().then(({ url }) => {\r\n    console.log(`🚀 Server ready at ${url}`);\r\n});\r\n\n\n//# sourceURL=webpack://setup-graphql-server/./src/index.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n// @ts-ignore\r\nconst connect_sqlite3_1 = __importDefault(__webpack_require__(/*! connect-sqlite3 */ \"connect-sqlite3\"));\r\nconst express_1 = __importDefault(__webpack_require__(/*! express */ \"express\"));\r\nconst express_session_1 = __importDefault(__webpack_require__(/*! express-session */ \"express-session\"));\r\nconst apollo_server_express_1 = __webpack_require__(/*! apollo-server-express */ \"apollo-server-express\");\r\nconst prisma_client_1 = __webpack_require__(/*! ./prisma-client */ \"./src/prisma-client.ts\");\r\nconst schema_1 = __webpack_require__(/*! ./schema */ \"./src/schema.ts\");\r\nconst dotenv_1 = __importDefault(__webpack_require__(/*! dotenv */ \"dotenv\"));\r\ndotenv_1.default.config();\r\n// I like to use redis for this: https://github.com/tj/connect-redis\r\nconst SQLiteStore = connect_sqlite3_1.default(express_session_1.default);\r\nconst app = express_1.default();\r\napp.use(express_session_1.default({\r\n    store: new SQLiteStore({\r\n        db: './prisma/db.db',\r\n        concurrentDB: true,\r\n    }),\r\n    name: 'qid',\r\n    secret: process.env.SESSION_SECRET || 'secret',\r\n    resave: false,\r\n    saveUninitialized: false,\r\n    cookie: {\r\n        httpOnly: true,\r\n        secure: \"development\" === 'production',\r\n        maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years\r\n    },\r\n}));\r\nconst apolloServer = new apollo_server_express_1.ApolloServer({\r\n    schema: schema_1.schema,\r\n    context: ({ req, res }) => ({\r\n        req,\r\n        res,\r\n        prisma: prisma_client_1.pc,\r\n        playground: {\r\n            settings: {\r\n                'request.credentials': 'include',\r\n            },\r\n        },\r\n    }),\r\n});\r\napolloServer.applyMiddleware({ app, cors: false });\r\nconst port = process.env.PORT || 4000;\r\napp.listen(port, () => {\r\n    console.log(`Server started at http://localhost:${port}/graphql`);\r\n});\r\n\n\n//# sourceURL=webpack://setup-graphql-server/./src/index.ts?");
 
 /***/ }),
 
@@ -50,13 +50,53 @@ module.exports = require("@prisma/client");;
 
 /***/ }),
 
-/***/ "apollo-server":
-/*!********************************!*\
-  !*** external "apollo-server" ***!
-  \********************************/
+/***/ "apollo-server-express":
+/*!****************************************!*\
+  !*** external "apollo-server-express" ***!
+  \****************************************/
 /***/ ((module) => {
 
-module.exports = require("apollo-server");;
+module.exports = require("apollo-server-express");;
+
+/***/ }),
+
+/***/ "connect-sqlite3":
+/*!**********************************!*\
+  !*** external "connect-sqlite3" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = require("connect-sqlite3");;
+
+/***/ }),
+
+/***/ "dotenv":
+/*!*************************!*\
+  !*** external "dotenv" ***!
+  \*************************/
+/***/ ((module) => {
+
+module.exports = require("dotenv");;
+
+/***/ }),
+
+/***/ "express":
+/*!**************************!*\
+  !*** external "express" ***!
+  \**************************/
+/***/ ((module) => {
+
+module.exports = require("express");;
+
+/***/ }),
+
+/***/ "express-session":
+/*!**********************************!*\
+  !*** external "express-session" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = require("express-session");;
 
 /***/ }),
 
@@ -120,7 +160,7 @@ module.exports = require("path");;
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -130,7 +170,7 @@ module.exports = require("path");;
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/index.ts");
 /******/ 	var __webpack_export_target__ = exports;
 /******/ 	for(var i in __webpack_exports__) __webpack_export_target__[i] = __webpack_exports__[i];

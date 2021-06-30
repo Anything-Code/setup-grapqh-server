@@ -1,14 +1,14 @@
 import { mutationField, nonNull, nullable, queryField } from 'nexus';
 import { pc } from '../prisma-client';
 
-// export const storeUser = mutationField('storeUser', {
-//     type: 'User',
-//     description: 'Stores a user manually',
-//     args: { input: nonNull('UserCreateInput') },
-//     resolve: async (_, { input }) => {
-//         return appDb.user.create({ data: input });
-//     },
-// });
+export const storeUser = mutationField('storeUser', {
+    type: 'User',
+    description: 'Stores a user manually',
+    args: { input: nonNull('UserCreateInput') },
+    resolve: async (_, { input }) => {
+        return pc.user.create({ data: input });
+    },
+});
 
 export const getStoredUser = queryField('getUser', {
     type: nullable('User'),
