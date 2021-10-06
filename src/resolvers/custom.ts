@@ -1,12 +1,35 @@
 import { mutationField, nonNull, nullable, queryField } from 'nexus';
 import { pc } from '../prisma-client';
 
-export const storeUser = mutationField('storeUser', {
+export const login = mutationField('login', {
     type: 'User',
-    description: 'Stores a user manually',
-    args: { input: nonNull('UserCreateInput') },
-    resolve: async (_, { input }) => {
-        return pc.user.create({ data: input });
+    description: 'Logs a user in',
+    resolve(_root, _args, { req }) {
+        req.session.authenticated = true;
+
+        console.log(req.session);
+
+        return null;
+    },
+});
+
+export const logout = mutationField('logout', {
+    type: 'User',
+    resolve(_root, _args, { req, res }) {
+        res.clearCookie('qid');
+
+        console.log(req.session);
+
+        return null;
+    },
+});
+
+export const check = mutationField('check', {
+    type: 'User',
+    resolve(_root, _args, { req }) {
+        console.log(req.session);
+
+        return null;
     },
 });
 

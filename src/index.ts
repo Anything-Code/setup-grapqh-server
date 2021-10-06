@@ -25,6 +25,7 @@ app.use(
         resave: false,
         saveUninitialized: false,
         cookie: {
+            sameSite: 'lax',
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
@@ -46,10 +47,22 @@ const apolloServer = new ApolloServer({
     }),
 });
 
-apolloServer.applyMiddleware({ app, cors: false });
+async function startApolloServer(app: express.Application, apolloServer: ApolloServer) {
+    await apolloServer.start();
 
-const port = process.env.PORT || 4000;
+    apolloServer.applyMiddleware({
+        app,
+        cors: {
+            origin: true,
+            credentials: true,
+        },
+    });
 
-app.listen(port, () => {
-    console.log(`Server started at http://localhost:${port}/graphql`);
-});
+    const port = process.env.PORT || 4000;
+
+    app.listen(port, () => {
+        console.log(`Server started at http://localhost:${port}/graphql`);
+    });
+}
+
+startApolloServer(app, apolloServer);
