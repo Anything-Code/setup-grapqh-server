@@ -1,7 +1,7 @@
 import { nexusPrisma } from 'nexus-plugin-prisma';
 import { makeSchema, mutationType, objectType, queryType } from 'nexus';
 import { join } from 'path';
-import { login, check, logout } from './resolvers/custom';
+import { login, me, logout, updateMyself, deleteMyself, register } from './resolvers/custom';
 import { allow, nexusShield } from 'nexus-shield';
 import { ForbiddenError } from 'apollo-server-express';
 import { isAuthenticated } from './rules';
@@ -32,24 +32,27 @@ export const schema = makeSchema({
                 t.model.password();
             },
         }),
-        queryType({
-            definition(t) {
-                t.crud.users(isAuthenticated);
-                t.crud.user();
-            },
-        }),
-        mutationType({
-            definition(t) {
-                t.crud.createOneUser();
-                t.crud.upsertOneUser();
-                t.crud.updateOneUser();
-                // t.crud.updateManyUser();
-                t.crud.deleteOneUser();
-                // t.crud.deleteManyUser();
-            },
-        }),
+        // queryType({
+        //     definition(t) {
+        //         t.crud.users(isAuthenticated);
+        //         t.crud.user(isAuthenticated);
+        //     },
+        // }),
+        // mutationType({
+        //     definition(t) {
+        //         t.crud.createOneUser();
+        //         t.crud.upsertOneUser();
+        //         t.crud.updateOneUser();
+        //         // t.crud.updateManyUser();
+        //         t.crud.deleteOneUser();
+        //         // t.crud.deleteManyUser();
+        //     },
+        // }),
+        register,
         login,
         logout,
-        check,
+        me,
+        updateMyself,
+        deleteMyself,
     ],
 });
