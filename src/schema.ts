@@ -32,12 +32,12 @@ export const schema = makeSchema({
                 t.model.password();
             },
         }),
-        // queryType({
-        //     definition(t) {
-        //         t.crud.users(isAuthenticated);
-        //         t.crud.user(isAuthenticated);
-        //     },
-        // }),
+        queryType({
+            definition(t) {
+                t.crud.users(isAuthenticated);
+                t.crud.user(isAuthenticated);
+            },
+        }),
         // mutationType({
         //     definition(t) {
         //         t.crud.createOneUser();
