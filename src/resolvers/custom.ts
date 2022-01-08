@@ -1,13 +1,13 @@
 import { AuthenticationError } from 'apollo-server-errors';
 import { mutationField, nonNull, nullable, queryField } from 'nexus';
 import { isAuthenticatedRuleType } from '../rules';
-import { pc } from '../prisma-client';
+import { FieldShieldResolver, ruleType } from 'nexus-shield';
 
 export const register = mutationField('register', {
     type: 'User',
     args: { name: nonNull('String'), email: nonNull('String'), password: nonNull('String') },
     description: 'Registers a new user.',
-    async resolve(_root, { name, email, password }, { req }) {
+    async resolve(_root, { name, email, password }, { req, pc }) {
         const user = await pc.user.create({ data: { name, email, password } });
 
         req.session.authenticated = true;
@@ -23,7 +23,7 @@ export const login = mutationField('login', {
     type: 'User',
     args: { email: nonNull('String'), password: nonNull('String') },
     description: 'Logs a user in',
-    async resolve(_root, { email, password }, { req }) {
+    async resolve(_root, { email, password }, { req, pc }) {
         const user = await pc.user.findFirst({ where: { email } });
         if (user == null) {
             throw AuthenticationError;
@@ -41,8 +41,8 @@ export const login = mutationField('login', {
 });
 
 export const logout = mutationField('logout', {
+    shield: isAuthenticatedRuleType as FieldShieldResolver<'Mutation', string>,
     type: 'Boolean',
-    shield: isAuthenticatedRuleType,
     resolve(_root, _args, { req, res }) {
         res.clearCookie('qid');
 
@@ -51,18 +51,18 @@ export const logout = mutationField('logout', {
 });
 
 export const me = mutationField('me', {
+    shield: isAuthenticatedRuleType as FieldShieldResolver<'Mutation', string>,
     type: 'User',
-    shield: isAuthenticatedRuleType,
     resolve(_root, _args, { req }): any {
         return req.session.user;
     },
 });
 
 export const updateMyself = mutationField('updateMyself', {
+    shield: isAuthenticatedRuleType as FieldShieldResolver<'Mutation', string>,
     type: 'User',
     args: { name: nullable('String'), email: nullable('String'), password: nullable('String') },
-    shield: isAuthenticatedRuleType,
-    async resolve(_root, { name, email, password }, { req }) {
+    async resolve(_root, { name, email, password }, { req, pc }) {
         const user = await pc.user.findFirst({ where: { id: req.session.user.id } });
         const updatedUser = await pc.user.update({
             where: {
@@ -80,11 +80,11 @@ export const updateMyself = mutationField('updateMyself', {
 });
 
 export const deleteMyself = mutationField('deleteMyself', {
+    shield: isAuthenticatedRuleType as FieldShieldResolver<'Mutation', string>,
     type: 'Boolean',
     args: { confirm: nonNull('Boolean') },
-    shield: isAuthenticatedRuleType,
-    async resolve(_root, { confirm }, { req, res }) {
-        const deletedUser = await pc.user.delete({
+    async resolve(_root, { confirm }, { req, res, pc }) {
+        await pc.user.delete({
             where: {
                 id: req.session.user.id,
             },

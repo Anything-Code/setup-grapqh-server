@@ -38,13 +38,13 @@ const apolloServer = new ApolloServer({
     context: ({ req, res }) => ({
         req,
         res,
-        prisma: pc,
-        playground: {
-            settings: {
-                'request.credentials': 'include',
-            },
-        },
+        pc,
     }),
+    playground: {
+        settings: {
+            'request.credentials': 'include',
+        },
+    },
 });
 
 async function startApolloServer(app: express.Application, apolloServer: ApolloServer) {

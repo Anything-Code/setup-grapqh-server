@@ -1,7 +1,8 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const CP = require("copy-webpack-plugin");
 
-module.exports =  {
+module.exports = {
     entry: './src/index.ts',
     target: 'node',
     node: {
@@ -21,12 +22,26 @@ module.exports =  {
         ]
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(process.cwd(), 'dist'),
         filename: 'build.js',
         libraryTarget: 'commonjs'
     },
     resolve: {
         extensions: ['.ts', '.js', '.node']
     },
-    externals: [nodeExternals()]
+    plugins: [
+        new CP({
+            patterns: ['node_modules/.prisma']
+            // patterns: [
+            //     {
+            //         // from: 'node_modules/.prisma/client/query-engine-rhel-openssl-1.0.x',
+            //         // to: 'node_modules/.prisma/client/query-engine-rhel-openssl-1.0.x'
+            //         from: 'node_modules/.prisma',
+            //         to: 'node_modules/.prisma'
+            //     },
+            // ],
+        }),
+    ],
+    // externals: [nodeExternals()]
+    externals: ['@prisma/client', 'connect-sqlite3', 'apollo-server-express']
 }

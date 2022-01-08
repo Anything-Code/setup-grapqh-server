@@ -2,9 +2,9 @@ import { nexusPrisma } from 'nexus-plugin-prisma';
 import { makeSchema, mutationType, objectType, queryType } from 'nexus';
 import { join } from 'path';
 import { login, me, logout, updateMyself, deleteMyself, register } from './resolvers/custom';
-import { allow, nexusShield } from 'nexus-shield';
+import { allow, FieldShieldResolver, nexusShield } from 'nexus-shield';
 import { ForbiddenError } from 'apollo-server-express';
-import { isAuthenticated } from './rules';
+import { isAuthenticated, isAuthenticatedType } from './rules';
 
 export const schema = makeSchema({
     plugins: [
@@ -12,7 +12,7 @@ export const schema = makeSchema({
             experimentalCRUD: true,
         }),
         nexusShield({
-            defaultError: new ForbiddenError('Not allowed'),
+            defaultError: new ForbiddenError('Not allowed!'),
             defaultRule: allow,
         }),
     ],
@@ -34,8 +34,8 @@ export const schema = makeSchema({
         }),
         queryType({
             definition(t) {
-                t.crud.users(isAuthenticated);
-                t.crud.user(isAuthenticated);
+                t.crud.users(isAuthenticated as isAuthenticatedType<FieldShieldResolver<'Query', string>>);
+                t.crud.user(isAuthenticated as isAuthenticatedType<FieldShieldResolver<'Query', string>>);
             },
         }),
         // mutationType({

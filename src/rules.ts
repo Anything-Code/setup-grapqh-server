@@ -9,3 +9,7 @@ export const isAuthenticatedRuleType = ruleType({
 export const isAuthenticated = {
     shield: isAuthenticatedRuleType,
 };
+
+export interface isAuthenticatedType<T> {
+    shield: T;
+}

@@ -139,17 +139,22 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@prisma/client@^3.1.1":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-3.2.0.tgz#6aa79b2945ca7553d5a4c14bbe0067d9f975e061"
-  integrity sha512-YCS/N3DZWoaKXhyS8dHwgUvT/NKXvlLbB5fsy0FvYC305JgNtMLjNbxsx0HjIcNw82MEhP7zWEXNvOLpOgGCUg==
+"@prisma/client@2.23.x":
+  version "2.23.0"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-2.23.0.tgz#4bf16ab19b140873ba79bd159da86842b1746e0a"
+  integrity sha512-xsHdo3+wIH0hJVGfKHYTEKtifStjKH0b5t8t7hV32Fypq6+3uxhAi3F25yxuI4XSHXg21nb7Ha82lNwU/0TERA==
   dependencies:
-    "@prisma/engines-version" "3.2.0-34.afdab2f10860244038c4e32458134112852d4dad"
+    "@prisma/engines-version" "2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b"
 
-"@prisma/engines-version@3.2.0-34.afdab2f10860244038c4e32458134112852d4dad":
-  version "3.2.0-34.afdab2f10860244038c4e32458134112852d4dad"
-  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-3.2.0-34.afdab2f10860244038c4e32458134112852d4dad.tgz#bd63ad4bbc32935ec43e93cb59220495893c844d"
-  integrity sha512-zYzFOmFvk5YzShqm6DuK7ULtjbJQpebAeD3gcpPfPjx6Uf9pug3bxeswp8/3sk2KKVUeKPUQg5p3TZLskyBNjA==
+"@prisma/engines-version@2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b":
+  version "2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b"
+  resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b.tgz#c813279bbea48dedad039b0bc3b044117d2dbaa1"
+  integrity sha512-VNgnOe+oPQKmy3HOtWi/Q1fvcKZUQkf1OfTD1pzrLBx9tJPejyxt1Mq54L+OOAuYvfrua6bmfojFVLh7uXuWVw==
+
+"@prisma/engines@2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b":
+  version "2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b"
+  resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b.tgz#440abe0ebef44b6e1bdaf2b4d14fcde9fe74f18c"
+  integrity sha512-Tgk3kggO5B9IT6mimJAw6HSxbFoDAuDKL3sHHSS41EnQm76j/nf4uhGZFPzOQwZWOLeT5ZLO2khr4/FCA9Nkhw==
 
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
@@ -1306,6 +1311,18 @@ cookie@0.4.1:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.1.tgz#afd713fe26ebd21ba95ceb61f9a8116e50a537d1"
   integrity sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==
 
+copy-webpack-plugin@9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/copy-webpack-plugin/-/copy-webpack-plugin-9.1.0.tgz#2d2c460c4c4695ec0a58afb2801a1205256c4e6b"
+  integrity sha512-rxnR7PaGigJzhqETHGmAcxKnLZSR5u1Y3/bcIv/1FnqXedcL/E2ewK7ZCNrArJKCiSv8yVXhTqetJh8inDvfsA==
+  dependencies:
+    fast-glob "^3.2.7"
+    glob-parent "^6.0.1"
+    globby "^11.0.3"
+    normalize-path "^3.0.0"
+    schema-utils "^3.1.1"
+    serialize-javascript "^6.0.0"
+
 core-js-pure@^3.10.2:
   version "3.18.2"
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.18.2.tgz#d8cc11d4885ea919f3de776d45e720e4c769d406"
@@ -1881,6 +1898,17 @@ fast-glob@^3.1.1:
     merge2 "^1.3.0"
     micromatch "^4.0.4"
 
+fast-glob@^3.2.7:
+  version "3.2.8"
+  resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.8.tgz#b4c563b4750cee1cbe8d8d41d3abf5cd6e211923"
+  integrity sha512-UsiHHXoDbC3iS7vBOFvld7Q9XqBu318xztdHiL10Fjov3AK5GI5bek2ZJkxZcjPguOYH39UL1W4A6w+l7tpNtw==
+  dependencies:
+    "@nodelib/fs.stat" "^2.0.2"
+    "@nodelib/fs.walk" "^1.2.3"
+    glob-parent "^5.1.2"
+    merge2 "^1.3.0"
+    micromatch "^4.0.4"
+
 fast-json-parse@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/fast-json-parse/-/fast-json-parse-1.0.3.tgz#43e5c61ee4efa9265633046b770fb682a7577c4d"
@@ -2100,6 +2128,13 @@ glob-parent@^5.1.2, glob-parent@~5.1.2:
   integrity sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==
   dependencies:
     is-glob "^4.0.1"
+
+glob-parent@^6.0.1:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-6.0.2.tgz#6d237d99083950c79290f24c7642a3de9a28f9e3"
+  integrity sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==
+  dependencies:
+    is-glob "^4.0.3"
 
 glob-to-regexp@^0.4.1:
   version "0.4.1"
@@ -2491,7 +2526,7 @@ is-fullwidth-code-point@^3.0.0:
   resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz#f116f8064fe90b3f7844a38997c0b75051269f1d"
   integrity sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==
 
-is-glob@^4.0.0, is-glob@^4.0.1, is-glob@~4.0.1:
+is-glob@^4.0.0, is-glob@^4.0.1, is-glob@^4.0.3, is-glob@~4.0.1:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-4.0.3.tgz#64f61e42cbbb2eec2071a9dac0b28ba1e65d5084"
   integrity sha512-xelSayHH36ZgE7ZWhli7pW34hNbNl8Ojv5KVmkJD4hBdD3th8Tfk9vYasLM+mXWOZhFkgZfxhLSnrwRr4elSSg==
@@ -3370,6 +3405,13 @@ prettier@^2.3.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.4.1.tgz#671e11c89c14a4cfc876ce564106c4a6726c9f5c"
   integrity sha512-9fbDAXSBcc6Bs1mZrDYb3XKzDLm4EXXL9sC1LqKP5rZkT6KRr/rf9amVUcODVXgguK/isJz0d0hP72WeaKWsvA==
+
+prisma@^2.23.0:
+  version "2.23.0"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-2.23.0.tgz#6464cca0e085ed23b1815013a67c868eff07a7d2"
+  integrity sha512-3c/lmDy8nsPcEsfCufvCTJUEuwmAcTPbeGg9fL1qjlvS314duLUA/k2nm3n1rq4ImKqzeC5uaKfvI2IoAfwrJA==
+  dependencies:
+    "@prisma/engines" "2.23.0-36.adf5e8cba3daf12d456d911d72b6e9418681b28b"
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
